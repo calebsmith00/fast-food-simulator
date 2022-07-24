@@ -1,11 +1,13 @@
 import NavLink, { LinkProps } from "./Link";
 
-type LinksProps = {
-  links: LinkProps[];
-};
+const linkObjects = [
+  { url: "/", displayText: "Home" },
+  { url: "/", displayText: "Order" },
+  { url: "/login", displayText: "Login" },
+];
 
-export default function NavLinks(props: LinksProps) {
-  const links = props.links.map((link: LinkProps) => (
+export default function NavLinks() {
+  const links = linkObjects.map((link: LinkProps) => (
     <NavLink key={link.displayText} props={link} />
   ));
 
