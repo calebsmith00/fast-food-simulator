@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
 
-type FormInputProps = {
+export type FormInputProps = {
   handleInput: ChangeEventHandler<HTMLInputElement>;
   getInputValue: Function;
   name: string;
@@ -14,7 +14,7 @@ export default function FormInput(props: FormInputProps) {
   useEffect(() => {
     const inputName = props.name;
 
-    setFormattedLabelName(inputName[0].toUpperCase() + inputName.substring(1));
+    setFormattedLabelName(inputName[0].toUpperCase() + inputName.slice(1));
   }, [props.name]);
 
   return (

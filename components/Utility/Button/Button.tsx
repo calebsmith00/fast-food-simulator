@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
+import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
 import { ButtonStyles } from "./Styles";
 
 type ButtonClasses = "btn-primary" | "btn-fail";
 
 type ButtonProps = {
-  className?: ButtonClasses;
   text: string;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+  className?: ButtonClasses;
 };
 
 export default function Button(props: ButtonProps) {
   const [styling, setStyling] = useState<string>();
-  const { className = "btn-primary" } = props;
+  const {
+    className = "btn-primary",
+    onClick = (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+    },
+  } = props;
 
   useEffect(() => {
     const styles = Object.values(ButtonStyles[className]).join(" ");
@@ -19,7 +25,8 @@ export default function Button(props: ButtonProps) {
 
   return (
     <button
-      className={`${styling} rounded-xl px-5 py-1 my-5 text-white font-semibold shadow-sm`}
+      className={`rounded-xl px-5 py-1 my-5 text-white font-semibold shadow-sm ${styling}`}
+      onClick={onClick}
     >
       {props.text}
     </button>
