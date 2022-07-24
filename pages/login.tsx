@@ -1,6 +1,6 @@
+import { MouseEvent } from "react";
 import FormContainer from "../components/Utility/Form/Container";
 import Header from "../components/Utility/Header";
-import useForm from "../hooks/useForm";
 import { InputFields } from "../hooks/useForm";
 
 const defaultInputFields: InputFields<string> = {
@@ -17,16 +17,19 @@ const defaultInputFields: InputFields<string> = {
 };
 
 export default function Login() {
-  const { handleInput, getInputValue, inputs } = useForm(defaultInputFields);
+  const handleSubmit = (
+    event: MouseEvent<HTMLButtonElement>,
+    inputs: InputFields<string>
+  ) => {
+    event.preventDefault();
+
+    console.log(inputs);
+  };
 
   return (
     <div>
       <Header text="Login" />
-      <FormContainer
-        handleInput={handleInput}
-        getInputValue={getInputValue}
-        inputs={inputs}
-      />
+      <FormContainer inputs={defaultInputFields} handleSubmit={handleSubmit} />
     </div>
   );
 }

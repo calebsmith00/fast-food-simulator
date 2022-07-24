@@ -1,4 +1,11 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  MouseEvent,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from "react";
 
 export type InputFields<T> = {
   [key: string]: {
@@ -11,7 +18,9 @@ export type InputFields<T> = {
 export default function useForm(defaultInputs: InputFields<any> = {}) {
   const [inputs, setInputs] = useState<InputFields<any>>(defaultInputs);
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInput: ChangeEventHandler<HTMLInputElement> = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, value } = event.target;
 
     setInputs((prevInput: any) => ({
@@ -23,14 +32,18 @@ export default function useForm(defaultInputs: InputFields<any> = {}) {
     }));
   };
 
-  const clearInputs = (event: ChangeEvent<HTMLButtonElement>) => {
+  const clearInputs: MouseEventHandler<HTMLButtonElement> = (
+    event: MouseEvent<HTMLButtonElement>
+  ) => {
     setInputs(defaultInputs);
   };
 
-  const getInputValue = (keyName: string) => {
+  const getInputValue = (keyName: string): string => {
     if (inputs[keyName]) {
       return inputs[keyName]["value"];
     }
+
+    return "";
   };
 
   return { inputs, handleInput, getInputValue, clearInputs };
