@@ -2,8 +2,9 @@ import NavLink, { LinkProps } from "./Link";
 
 const linkObjects = [
   { url: "/", displayText: "Home" },
-  { url: "/", displayText: "Order" },
-  { url: "/login", displayText: "Login" },
+  { url: "/order", displayText: "Order" },
+  { url: "/api/auth/login", displayText: "Login", shouldUseAnchor: true },
+  { url: "/api/auth/logout", displayText: "Logout", shouldUseAnchor: true },
 ];
 
 export default function NavLinks() {
